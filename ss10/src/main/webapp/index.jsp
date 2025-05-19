@@ -22,5 +22,7 @@
 <a href="/booking">Bt8:</a>
 <br>
 <a href="/library/add">Bt9:</a>
+<br>
+<a href="/products">Bt10:</a>
 </body>
 </html>

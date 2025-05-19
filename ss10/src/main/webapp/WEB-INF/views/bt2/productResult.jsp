@@ -7,7 +7,6 @@
 <h2>Thông Tin</h2>
 <p>Tên: ${product.name}</p>
 <p>Giá: ${product.price}</p>
-<p>img: <img src="${product.img}" /></p>
 <p>Mô tả: ${product.description}</p>
 </body>
 </html>
