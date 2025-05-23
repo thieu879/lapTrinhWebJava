@@ -12,5 +12,9 @@
 <a href="/registers">Bt6:</a>
 <br>
 <a href="/review">Bt7:</a>
+<br>
+<a href="${pageContext.request.contextPath}/categories">Bt8,9:</a>
+<br>
+<a href="${pageContext.request.contextPath}/movies">Bt10:</a>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "/bt6/registers";
         }
-        return "success";
+        return "/bt6/success";
     }
 }
 
