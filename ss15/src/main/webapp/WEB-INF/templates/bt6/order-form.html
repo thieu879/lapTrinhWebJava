@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Đặt hàng</title>
+</head>
+<body>
+<h2>Thông tin đặt hàng</h2>
+<form th:action="@{/orders/save}" method="post" th:object="${order}">
+    <label for="recipientName">Tên người nhận:</label><br />
+    <input type="text" id="recipientName" th:field="*{recipientName}" required /><br /><br />
+
+    <label for="address">Địa chỉ:</label><br />
+    <textarea id="address" th:field="*{address}" rows="3" cols="40" required></textarea><br /><br />
+
+    <label for="phoneNumber">Số điện thoại:</label><br />
+    <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required /><br /><br />
+
+    <button type="submit">Đặt hàng</button>
+    <a th:href="@{/cart}">Quay lại giỏ hàng</a>
+</form>
+</body>
+</html>

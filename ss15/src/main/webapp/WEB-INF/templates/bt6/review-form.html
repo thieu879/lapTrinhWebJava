@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${review != null} ? 'Sửa đánh giá' : 'Thêm đánh giá mới'">Thêm đánh giá mới</title>
+</head>
+<body>
+<h1 th:text="${review != null} ? 'Sửa đánh giá' : 'Thêm đánh giá mới'">Thêm đánh giá mới</h1>
+
+<form th:action="@{/reviews}" method="post">
+    <input type="hidden" name="action" th:value="${review != null} ? 'edit' : 'add'"/>
+    <input type="hidden" name="idReview" th:value="${review != null} ? ${review.idReview} : ''"/>
+
+    <label for="idUser">ID Người dùng:</label><br/>
+    <input type="text" id="idUser" name="idUser" th:value="${review != null} ? ${review.idUser} : ''" required /><br/><br/>
+
+    <label for="idProduct">ID Sản phẩm:</label><br/>
+    <input type="text" id="idProduct" name="idProduct" th:value="${review != null} ? ${review.idProduct} : ''" required /><br/><br/>
+
+    <label for="rating">Đánh giá (1-5):</label><br/>
+    <input type="number" id="rating" name="rating" min="1" max="5" th:value="${review != null} ? ${review.rating} : ''" required /><br/><br/>
+
+    <label for="comment">Bình luận:</label><br/>
+    <textarea id="comment" name="comment" rows="4" cols="50" required
+              th:text="${review != null} ? ${review.comment} : ''"></textarea><br/><br/>
+
+    <button type="submit">Lưu</button>
+    <a th:href="@{/reviews}">Hủy</a>
+</form>
+</body>
+</html>

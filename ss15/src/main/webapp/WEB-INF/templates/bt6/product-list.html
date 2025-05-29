@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h2>Danh sách sản phẩm</h2>
+<a th:href="@{/products/form}">Thêm sản phẩm mới</a>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr><th>ID</th><th>Tên sản phẩm</th><th>Giá</th><th>Mô tả</th><th>Hành động</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 2, 'POINT')}"></td>
+        <td th:text="${p.description}"></td>
+        <td>
+            <a th:href="@{'/products/form?id=' + ${p.id}}">Sửa</a> |
+            <a th:href="@{'/products/delete/' + ${p.id}}" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(products)}">
+        <td colspan="5">Chưa có sản phẩm nào.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

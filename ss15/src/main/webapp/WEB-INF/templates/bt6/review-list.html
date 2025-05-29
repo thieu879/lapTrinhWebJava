@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Danh sách đánh giá</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #eee; }
+        a { margin-right: 10px; }
+    </style>
+</head>
+<body>
+<h1>Danh sách đánh giá sản phẩm</h1>
+
+<a th:href="@{/reviews(action='add')}">Thêm đánh giá mới</a>
+<br/><br/>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID Review</th>
+        <th>ID Người dùng</th>
+        <th>ID Sản phẩm</th>
+        <th>Đánh giá</th>
+        <th>Bình luận</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${reviews}">
+        <td th:text="${r.idReview}">1</td>
+        <td th:text="${r.idUser}">user01</td>
+        <td th:text="${r.idProduct}">product01</td>
+        <td th:text="${r.rating}">5</td>
+        <td th:text="${r.comment}">Bình luận mẫu</td>
+        <td>
+            <a th:href="@{/reviews(action='edit', id=${r.idReview})}">Sửa</a>
+            <a th:href="@{/reviews(action='delete', id=${r.idReview})}"
+               onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
