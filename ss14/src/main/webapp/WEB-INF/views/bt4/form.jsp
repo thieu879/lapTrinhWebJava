@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="add" method="post">
+<form action="${pageContext.request.contextPath}/add" method="post">
     Tên sản phẩm: <input type="text" name="name" required/>
     Số lượng: <input type="number" name="quantity" required/>
     <input type="submit" value="Thêm vào giỏ hàng"/>

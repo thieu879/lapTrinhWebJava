@@ -1,24 +1,27 @@
 package com.data.ss14.model.bt9;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+
 public class Transaction {
+    private Integer id;
+
+    @NotBlank(message = "{transaction.description.notblank}")
     private String description;
-    private double amount;
-    private String type; // "thu" hoặc "chi"
 
-    public Transaction() {}
+    @NotNull(message = "{transaction.amount.notnull}")
+    private BigDecimal amount;
 
-    public Transaction(String description, double amount, String type) {
-        this.description = description;
-        this.amount = amount;
-        this.type = type;
-    }
+    @NotBlank(message = "{transaction.type.notblank}")
+    private String type;
 
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-
-    public double getAmount() { return amount; }
-    public void setAmount(double amount) { this.amount = amount; }
-
+    public BigDecimal getAmount() { return amount; }
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 }

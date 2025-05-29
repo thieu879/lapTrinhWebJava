@@ -2,17 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+  <title>Danh sách sản phẩm</title>
 </head>
 <body>
-<table>
+<h2>Danh sách sản phẩm</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Tên sản phẩm</th>
+    <th>Giá</th>
+  </tr>
   <c:forEach items="${products}" var="p">
     <tr>
-      <td>${p.id}</td>
       <td>${p.name}</td>
       <td>${p.price}</td>
     </tr>
   </c:forEach>
 </table>
+<br/>
+<a href="<c:url value='/product/add' />">Thêm sản phẩm mới</a>
 </body>
 </html>

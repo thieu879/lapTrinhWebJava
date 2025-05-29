@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
     @Autowired
     private OrderService orderService;

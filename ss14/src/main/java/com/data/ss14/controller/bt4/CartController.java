@@ -56,7 +56,7 @@ public class CartController {
         productCookie.setMaxAge(7 * 24 * 60 * 60);
         response.addCookie(productCookie);
 
-        return "redirect:/bt4/cart";
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart")
@@ -73,7 +73,7 @@ public class CartController {
             cart.removeIf(p -> p.getName().equals(name));
             session.setAttribute("CART", cart);
         }
-        return "redirect:/bt4/cart";
+        return "redirect:/cart";
     }
 }
 

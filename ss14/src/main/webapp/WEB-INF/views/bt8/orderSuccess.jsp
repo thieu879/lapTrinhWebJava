@@ -3,7 +3,7 @@
 <head><title>Thành công</title></head>
 <body>
 <h2>${message}</h2>
-<a href="/order/view">Xem đơn hàng</a>
+<a href="/orders/view">Xem đơn hàng</a>
 </body>
 </html>
 

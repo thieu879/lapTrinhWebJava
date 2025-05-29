@@ -1,10 +1,11 @@
 package com.data.ss14.model.bt2;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 public class Product {
-    @NotNull(message = "Tên sản phẩm không được để trống")
+    @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
 
     @NotNull(message = "Giá không được để trống")
@@ -13,6 +14,7 @@ public class Product {
 
     public Product() {
     }
+
     public Product(String name, Integer price) {
         this.name = name;
         this.price = price;
