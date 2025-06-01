@@ -17,7 +17,7 @@ public class ResumeController {
     @GetMapping
     public String listResumes(Model model) {
         model.addAttribute("resumes", resumeService.getAllResumes());
-        return "/bt10.list";
+        return "/bt10/list";
     }
 
     @GetMapping("/add")
