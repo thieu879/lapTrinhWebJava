@@ -1,0 +1,9 @@
+.wrapper{
+    width: 300px;
+    padding: 50px 20px;
+    border-radius: 12px;
+    text-align: center;
+    background: #ffffff12;
+    border: 1px solid #fff;
+    backdrop-filter: blur(10px);
+}
