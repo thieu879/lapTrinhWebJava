@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+<h2>Edit User</h2>
+<form th:action="@{/edit}" th:object="${customer}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Username: </label>
+    <input type="text" th:field="*{username}" required/><br/>
+    <label>Email: </label>
+    <input type="email" th:field="*{email}" required/><br/>
+    <label>Phone: </label>
+    <input type="text" th:field="*{phone}" required/><br/>
+    <!-- Nếu muốn cho sửa password, thêm trường này -->
+    <!--<label>Password: </label>
+    <input type="password" th:field="*{password}" required/><br/>-->
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

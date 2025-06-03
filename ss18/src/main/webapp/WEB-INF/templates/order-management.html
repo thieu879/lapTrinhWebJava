@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý đơn hàng</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>Quản lý đơn hàng</h2>
+<form th:action="@{/admin/orders}" method="get">
+    <input type="text" name="recipientName" th:value="${recipientName}" placeholder="Tên người nhận">
+    <input type="date" name="startDate" th:value="${#dates.format(startDate, 'yyyy-MM-dd')}">
+    <input type="date" name="endDate" th:value="${#dates.format(endDate, 'yyyy-MM-dd')}">
+    <select name="status">
+        <option value="" th:selected="${status == null || status == ''}">Tất cả trạng thái</option>
+        <option value="PENDING" th:selected="${status == 'PENDING'}">Chờ xử lý</option>
+        <option value="CONFIRMED" th:selected="${status == 'CONFIRMED'}">Đã xác nhận</option>
+        <option value="CANCELLED" th:selected="${status == 'CANCELLED'}">Đã hủy</option>
+        <option value="DELIVERED" th:selected="${status == 'DELIVERED'}">Đã giao</option>
+    </select>
+    <button type="submit">Lọc / Tìm kiếm</button>
+</form>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên người nhận</th>
+        <th>Ngày đặt</th>
+        <th>Trạng thái</th>
+        <th>Địa chỉ</th>
+        <th>SĐT</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.recipientName}"></td>
+        <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${order.address}"></td>
+        <td th:text="${order.phone}"></td>
+        <td>
+            <form th:action="@{/admin/orders/update-status}" method="post" style="display:inline;">
+                <input type="hidden" name="orderId" th:value="${order.id}">
+                <input type="hidden" name="page" th:value="${currentPage}">
+                <input type="hidden" name="size" th:value="10">
+                <select name="status">
+                    <option value="CONFIRMED" th:selected="${order.status == 'CONFIRMED'}">Xác nhận</option>
+                    <option value="CANCELLED" th:selected="${order.status == 'CANCELLED'}">Hủy</option>
+                    <option value="DELIVERED" th:selected="${order.status == 'DELIVERED'}">Đã giao</option>
+                </select>
+                <button type="submit">Cập nhật</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Phân trang -->
+<div>
+    <span th:if="${totalPages > 1}">
+        <a th:if="${currentPage > 1}" th:href="@{/admin/orders(page=${currentPage-1},size=10,recipientName=${recipientName},startDate=${#dates.format(startDate, 'yyyy-MM-dd')},endDate=${#dates.format(endDate, 'yyyy-MM-dd')},status=${status})}">Trước</a>
+        <span th:text="'Trang ' + ${currentPage} + '/' + ${totalPages}"></span>
+        <a th:if="${currentPage < totalPages}" th:href="@{/admin/orders(page=${currentPage+1},size=10,recipientName=${recipientName},startDate=${#dates.format(startDate, 'yyyy-MM-dd')},endDate=${#dates.format(endDate, 'yyyy-MM-dd')},status=${status})}">Sau</a>
+    </span>
+</div>
+</body>
+</html>
