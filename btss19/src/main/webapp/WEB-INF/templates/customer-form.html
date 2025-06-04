@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thông tin khách hàng</title>
+</head>
+<body>
+<h2 th:text="${customer.id == 0} ? 'Thêm mới khách hàng' : 'Cập nhật khách hàng'"></h2>
+<form th:action="@{${customer.id == 0} ? '/add' : '/edit'}" th:object="${customer}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label>Họ:</label>
+        <input type="text" th:field="*{firstName}"/>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></span>
+    </div>
+    <div>
+        <label>Tên:</label>
+        <input type="text" th:field="*{lastName}"/>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red"></span>
+    </div>
+    <div>
+        <label>Phone:</label>
+        <input type="text" th:field="*{phone}"/>
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <input type="text" th:field="*{address}"/>
+    </div>
+    <div>
+        <label>Ảnh:</label>
+        <input type="text" th:field="*{fileImage}"/>
+    </div>
+    <button type="submit">Lưu</button>
+    <a th:href="@{/customers}">Quay lại</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý khách hàng</title>
+</head>
+<body>
+<h1>Quản lý khách hàng</h1>
+<form th:action="@{/search}" method="get">
+    <input type="text" name="keyword" placeholder="Tìm kiếm..."/>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<a th:href="@{/add}">Thêm mới</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Họ</th>
+        <th>Tên</th>
+        <th>Phone</th>
+        <th>Địa chỉ</th>
+        <th>Ảnh</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="c : ${customers}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.firstName}"></td>
+        <td th:text="${c.lastName}"></td>
+        <td th:text="${c.phone}"></td>
+        <td th:text="${c.address}"></td>
+        <td th:text="${c.fileImage}"></td>
+        <td>
+            <a th:href="@{/customers/edit/{id}(id=${c.id})}">Sửa</a>
+            <a th:href="@{/customers/delete/{id}(id=${c.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
