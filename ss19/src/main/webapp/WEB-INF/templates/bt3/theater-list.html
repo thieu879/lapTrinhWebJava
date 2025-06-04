@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách rạp chiếu phim</title>
+</head>
+<body>
+<h1>Danh sách rạp chiếu phim</h1>
+
+<div th:if="${message}" style="color:green" th:text="${message}"></div>
+
+<form th:action="@{/theaters}" method="get">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm rạp..."/>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<a th:href="@{/add}">Thêm rạp mới</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên rạp</th>
+        <th>Địa chỉ</th>
+        <th>Số phòng chiếu</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="theater : ${theaters}">
+        <td th:text="${theater.id}"></td>
+        <td th:text="${theater.theaterName}"></td>
+        <td th:text="${theater.address}"></td>
+        <td th:text="${theater.numberScreenRoom}"></td>
+        <td th:text="${theater.status ? 'Đang hoạt động' : 'Ngừng hoạt động'}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${theater.id})}">Sửa</a>
+            <a th:href="@{/delete/{id}(id=${theater.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <span th:if="${totalPages > 1}">
+        <a th:each="i : ${#numbers.sequence(1, totalPages)}"
+           th:href="@{/theaters(page=${i}, size=${10}, keyword=${keyword})}"
+           th:text="${i}"
+           th:classappend="${i == currentPage} ? 'active' : ''">1</a>
+    </span>
+</div>
+</body>
+</html>

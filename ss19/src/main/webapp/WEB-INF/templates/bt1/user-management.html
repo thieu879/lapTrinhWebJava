@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/user-management}" method="get">
+        <input type="text" name="search" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>password</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td>
+            <p th:if="${user.isActive == true}">
+                Đang hoạt động
+            </p>
+            <p th:unless="${user.isActive == true}">
+                Dừng hoạt động
+            </p>
+        </td>
+        <td>
+            <a th:href="@{/user-management/status(id=${user.id}, status=${user.isActive ? false : true})}">
+                <button type="button" th:if="${user.isActive == true}">
+                    <i class="fa-solid fa-lock"></i>
+                </button>
+                <button type="button" th:unless="${user.isActive == true}">
+                    <i class="fa-solid fa-lock-open"></i>
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:if="${totalPages > 1}">
+        <a th:each="i : ${#numbers.sequence(1, totalPages)}"
+           th:href="@{/user-management(page=${i}, size=${5}, search=${search})}"
+           th:text="${i}"
+           th:classappend="${i == currentPage} ? 'active' : ''">1</a>
+    </span>
+</div>
+<script src="https://kit.fontawesome.com/62fa62fdc5.js" crossorigin="anonymous"></script>
+</body>
+</html>
