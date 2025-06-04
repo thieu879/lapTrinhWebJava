@@ -28,8 +28,8 @@
         <td th:text="${c.address}"></td>
         <td th:text="${c.fileImage}"></td>
         <td>
-            <a th:href="@{/customers/edit/{id}(id=${c.id})}">Sửa</a>
-            <a th:href="@{/customers/delete/{id}(id=${c.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+            <a th:href="@{/edit/{id}(id=${c.id})}">Sửa</a>
+            <a th:href="@{/delete/{id}(id=${c.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
         </td>
     </tr>
 </table>
