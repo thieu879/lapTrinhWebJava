@@ -26,7 +26,9 @@
         <td th:text="${c.lastName}"></td>
         <td th:text="${c.phone}"></td>
         <td th:text="${c.address}"></td>
-        <td th:text="${c.fileImage}"></td>
+        <td>
+            <img th:src="@{${c.fileImage}}" alt="customer Image" style="width: 50px; height: 50px;">
+        </td>
         <td>
             <a th:href="@{/edit/{id}(id=${c.id})}">Sửa</a>
             <a th:href="@{/delete/{id}(id=${c.id})}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>

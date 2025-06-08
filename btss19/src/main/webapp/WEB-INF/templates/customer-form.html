@@ -5,7 +5,7 @@
 </head>
 <body>
 <h2 th:text="${customer.id == 0} ? 'Thêm mới khách hàng' : 'Cập nhật khách hàng'"></h2>
-<form th:action="@{${customer.id == 0} ? '/add' : '/edit'}" th:object="${customer}" method="post">
+<form th:action="@{${customer.id == 0} ? '/add' : '/edit'}" enctype="multipart/form-data" th:object="${customer}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <div>
         <label>Họ:</label>
@@ -27,7 +27,7 @@
     </div>
     <div>
         <label>Ảnh:</label>
-        <input type="text" th:field="*{fileImage}"/>
+        <input type="file" name="image"/>
     </div>
     <button type="submit">Lưu</button>
     <a th:href="@{/customers}">Quay lại</a>

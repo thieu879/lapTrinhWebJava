@@ -1,18 +1,23 @@
 package com.data.ss18.controller;
 
 import com.data.ss18.entity.Product;
+import com.data.ss18.service.CloudinaryService;
 import com.data.ss18.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class ProductManagementController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     @GetMapping("/product-management")
     public String productManagement(@RequestParam(value = "search", required = false) String search,
@@ -34,10 +39,22 @@ public class ProductManagementController {
     }
 
     @PostMapping("/add-product")
-    public String addProduct(@ModelAttribute Product product) {
-        productService.saveProduct(product);
+    public String addProduct(
+            @ModelAttribute Product product,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile
+    ) {
+        try {
+            if (imageFile != null && !imageFile.isEmpty()) {
+                String imageUrl = cloudinaryService.uploadImage(imageFile);
+                product.setImage(imageUrl);
+            }
+            productService.saveProduct(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/product-management";
     }
+
 
     @GetMapping("/edit-product/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
@@ -47,10 +64,27 @@ public class ProductManagementController {
     }
 
     @PostMapping("/edit-product")
-    public String editProduct(@ModelAttribute Product product) {
+    public String editProduct(@ModelAttribute Product product,
+                              @RequestParam("imageFile") MultipartFile imageFile) {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String imageUrl = cloudinaryService.uploadImage(imageFile);
+                product.setImage(imageUrl);
+            } catch (IOException e) {
+                // Xử lý lỗi upload
+                e.printStackTrace();
+            }
+        } else {
+            // Nếu không upload ảnh mới, giữ nguyên ảnh cũ
+            Product old = productService.getProductById(product.getId());
+            if (old != null) {
+                product.setImage(old.getImage());
+            }
+        }
         productService.updateProduct(product);
         return "redirect:/product-management";
     }
+
 
     @GetMapping("/delete-product/{id}")
     public String deleteProduct(@PathVariable int id) {

@@ -1,4 +1,4 @@
-package com.data.btss19.config;
+package com.data.ss20.config;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -22,7 +22,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.data.btss19"})
+@ComponentScan(basePackages = {"com.data.ss20"})
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private ApplicationContext applicationContext;
@@ -101,7 +101,7 @@ public class WebConfig implements WebMvcConfigurer {
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
-        resolver.setMaxUploadSize(-1); // 5MB
+        resolver.setMaxUploadSize(5 * 1024 * 1024); // 5MB
         return resolver;
     }
 

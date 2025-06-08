@@ -1,5 +1,7 @@
 package com.data.btss19.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +16,10 @@ public class Customer {
     private int id;
     @NotBlank(message = "First name không được để trống")
     @Size(min = 3, max = 10, message = "First name phải từ 3 đến 10 ký tự")
-    private String FirstName;
+    private String firstName;
     @NotBlank(message = "Last name không được để trống")
     @Size(min = 3, max = 10, message = "Last name phải từ 3 đến 10 ký tự")
-    private String LastName;
+    private String lastName;
     private String phone;
     private String address;
     private String fileImage;
@@ -26,8 +28,8 @@ public class Customer {
     }
     public Customer(int id, String firstName, String lastName, String phone, String address, String fileImage) {
         this.id = id;
-        FirstName = firstName;
-        LastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phone = phone;
         this.address = address;
         this.fileImage = fileImage;
@@ -50,11 +52,11 @@ public class Customer {
     }
 
     public String getFirstName() {
-        return FirstName;
+            return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public int getId() {
@@ -66,11 +68,11 @@ public class Customer {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getPhone() {
