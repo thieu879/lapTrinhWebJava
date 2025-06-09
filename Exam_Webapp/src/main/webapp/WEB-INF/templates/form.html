@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm/Sửa khóa học</title>
+</head>
+<body>
+<h2 th:text="${course.id == null ? 'Thêm khóa học' : 'Sửa khóa học'}"></h2>
+<form th:action="@{/save}" th:object="${course}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label>Tên khóa học:</label>
+    <input type="text" th:field="*{name}" required/><br/>
+    <label>Mô tả:</label>
+    <textarea th:field="*{description}" required></textarea><br/>
+    <button type="submit">Lưu</button>
+    <a th:href="@{/courses}">Quay lại</a>
+</form>
+</body>
+</html>
